@@ -1,20 +1,21 @@
-let s = "Was it a car or a cat i saw?"
+let numbers = [1,2,3,4] 
+let target = 3
 
-let cleanStr=s.toLowerCase().replace(/[^a-z0-9]/g,'')
-
-let left=0;
-let right=cleanStr.length-1
-let output=true
-while(left<right){
-  if(cleanStr[left]!==cleanStr[right]){
-    output=false
-  }else{
-    left=left+1
-    right=right-1
-    output=true
+let l=0
+let r=numbers.length-1
+while(l<=r){
+  let sum=numbers[l]+numbers[r]
+  if(sum>target){
+    r--
+  }
+  if(sum<target){
+    l++
+  }
+  if(sum===target){
+    console.log(l+1,r+1)
+    return
   }
 }
-console.log(output)
 
 
 
