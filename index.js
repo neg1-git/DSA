@@ -1,34 +1,27 @@
-let nums = [-2,0,0,2,2] 
-let numbers= nums.sort((a,b)=>a-b)
-let output=[]
+let height = [1,7,2,5,4,7,3,6]
 
-for(let t=0 ; t<numbers.length ;t++){
-let target=-numbers[t]
-let l=t+1
-let r=numbers.length-1
-if(numbers[t] === numbers[t-1]){continue}
+let l=0
+let r=height.length-1
+let result=0
+
 while(l<r){
-  let sum=numbers[l]+numbers[r]
-  if(sum>target){
-    r--
-  }
-  if(sum<target){
+  let hl=height[l];
+  let hr=height[r];
+  let y=Math.min(hl,hr)
+  let x=r-l
+  result=Math.max(result,x*y)
+
+  if(hl<hr){
     l++
   }
-  if(sum===target){
-    output.push([numbers[l],numbers[r],numbers[t]])
-    l++
+  else if(hl>hr){
     r--
-    while (l < r && numbers[l] === numbers[l - 1]) {
-      l++;
-    }
   }
+  else{
+    l++
+  }
+
 }
-}
-
-console.log(output)
-
-
-
+return result;
 
 
