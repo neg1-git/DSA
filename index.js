@@ -1,27 +1,18 @@
-let height = [1,7,2,5,4,7,3,6]
+let prices =[5, 2, 3, 1, 6]
 
-let l=0
-let r=height.length-1
-let result=0
-
-while(l<r){
-  let hl=height[l];
-  let hr=height[r];
-  let y=Math.min(hl,hr)
-  let x=r-l
-  result=Math.max(result,x*y)
-
-  if(hl<hr){
-    l++
+let output=0;
+let l=0;
+let r=1;
+while(l<r&&l<prices.length&&r<prices.length){
+  let profit = prices[r]-prices[l]
+  if(profit<0){
+    l=r
+    r++
+  }else{
+    r++
+    output=Math.max(profit,output)
   }
-  else if(hl>hr){
-    r--
-  }
-  else{
-    l++
-  }
-
 }
-return result;
+console.log(output)
 
 
