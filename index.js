@@ -1,18 +1,21 @@
-let prices =[5, 2, 3, 1, 6]
+let s = "abbcde"
 
-let output=0;
 let l=0;
-let r=1;
-while(l<r&&l<prices.length&&r<prices.length){
-  let profit = prices[r]-prices[l]
-  if(profit<0){
-    l=r
+let r=0;
+let count=0;
+let set=new Set([]);
+
+while(l<=r&&r<s.length){
+  left=s[l]
+  right=s[r]
+
+  if(!set.has(right)){
     r++
+    set.add(right)
   }else{
-    r++
-    output=Math.max(profit,output)
-  }
+    l++
+    set.delete(left)  }
+  console.log(set)
+  count=Math.max(count,set.size)
 }
-console.log(output)
-
-
+console.log(count)
