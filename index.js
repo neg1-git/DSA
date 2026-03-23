@@ -1,38 +1,27 @@
-let matrix = [[1]]
-let target = 0
+let piles = [1,4,3,2]
+let h = 9
 
-let left=0;
-let right= matrix.length-1
+let output=Infinity;
+let l=1
+let r=Math.max(...piles)
+while(l<=r){
+  let k = Math.floor((l+r)/2)
+  let b=0;
+  console.log("rate is:",k)
+  for (let i = 0; i < piles.length; i++) {
 
-while(left<=right){
-  let mid= Math.floor((left+right)/2)
-
-  if(target < matrix[mid][0]){
-    right=mid-1
-  }else if(target>matrix[mid][matrix[mid].length-1]){
-    left=mid+1
-  }else{
-  let m= matrix[mid]
-  let l=0;
-  let r=m.length-1
-
-  while(l<=r){
-    const middle=Math.floor((l+r)/2);
-    if(target<m[middle]){
-      r=middle-1
-    }
-    else if(target>m[middle]){
-      l=middle+1
-    }
-    else{
-      console.log(true)
-      return
-    }
+    let a = Math.ceil(piles[i]/k)
+    b=a+b
+    
   }
-  console.log(false)
-  break
-
+  console.log(b);
+  if(b<=h){
+    output=k
+    r=k-1
+  }
+  else{
+    l=k+1
   }
 }
-console.log(false)
+  console.log(output)
 
