@@ -1,26 +1,41 @@
-let nums = [5,1,2,3,4]
-let target = 1
+let key="alice"
+let timestamp="2"
+
+let store = {
+  "alice": [
+    ["happy", 1],
+    ["sad", 3],
+    ["angry", 5]
+  ],
+  "bob": [
+    ["chilling", 2]
+  ]
+};
 
 
-let l=0;
-let r=nums.length-1;
+ let l=0
+ let r=store[key].length-1
+let out
 
-while(l<r){
+while(l<=r){
   let m=Math.floor((l+r)/2);
+  const element = store[key][m];
 
-  if(nums[m]>=nums[l]){
-    if(nums[m]>=target && target>nums[l]){
-      r=m
-    }else{
-      l=m+1
-    }
+  if(timestamp>=element[1]){
+    out=element
+    l=m+1
   }else{
-    if(target>nums[m] && target<=nums[r]){
-      l=m+1
-    }else{
-      r=m
-    }
+    r=m-1
   }
-console.log(m)
 }
+console.log(out)
 
+/* for (let i = 0; i < store[key].length; i++) {
+  const element = store[key][i];
+  if(store[key][i][1]<=timestamp){
+
+    out=element
+  }
+  
+}
+console.log(out)*/
