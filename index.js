@@ -3,7 +3,7 @@ let timestamp="2"
 
 let store = {
   "alice": [
-    ["happy", 1],
+    ["good", 1],
     ["sad", 3],
     ["angry", 5]
   ],
