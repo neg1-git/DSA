@@ -1,30 +1,36 @@
-class MinStack {
-    constructor() {
-        this.minStack = [];
-        this.min = [];
-    }
+let tokens = ["4", "13", "5", "/", "+"]
+let operators = ["+","-","*","/"]
+let num=[]
+let op=[]
+let output
 
-    push(val) {
-        this.minStack.push(val);
-        // If min stack is empty OR the new value is a new/duplicate minimum
-        if (this.min.length === 0 || val <= this.min[this.min.length - 1]) {
-            this.min.push(val);
-        }
-    }
-
-    pop() {
-        const poppedValue = this.minStack.pop();
-        // If the value we just removed was our current minimum, remove it from history
-        if (this.min.length > 0 && poppedValue === this.min[this.min.length - 1]) {
-            this.min.pop();
-        }
-    }
-
-    top() {
-        return this.minStack[this.minStack.length - 1];
-    }
-
-    getMin() {
-        return this.min[this.min.length - 1];
+for(const token of tokens){
+    if(token==='+'){
+        output=Number(num[num.length-2])+Number(num[num.length-1])
+        num.pop()
+        num.pop()
+        num.push(output)
+        console.log(output)
+    }else if(token==='-'){
+        output=Number(num[num.length-2])-Number(num[num.length-1])
+        num.pop()
+        num.pop()
+        num.push(output)
+        console.log(output)
+    }else if(token==='*'){
+        output=Number(num[num.length-2])*Number(num[num.length-1])
+        num.pop()
+        num.pop()
+        num.push(output)
+        console.log(output)
+    }else if(token==='/'){
+        output=Number(num[num.length-2])/Number(num[num.length-1])
+        num.pop()
+        num.pop()
+        num.push(Math.trunc(output))
+        console.log(output)
+    }else{
+        num.push(token)
     }
 }
+console.log(output)
