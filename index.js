@@ -1,36 +1,30 @@
-let tokens = ["4", "13", "5", "/", "+"]
-let operators = ["+","-","*","/"]
-let num=[]
-let op=[]
-let output
+let temperatures = [30, 38, 30, 36, 35, 40, 28];
 
-for(const token of tokens){
-    if(token==='+'){
-        output=Number(num[num.length-2])+Number(num[num.length-1])
-        num.pop()
-        num.pop()
-        num.push(output)
-        console.log(output)
-    }else if(token==='-'){
-        output=Number(num[num.length-2])-Number(num[num.length-1])
-        num.pop()
-        num.pop()
-        num.push(output)
-        console.log(output)
-    }else if(token==='*'){
-        output=Number(num[num.length-2])*Number(num[num.length-1])
-        num.pop()
-        num.pop()
-        num.push(output)
-        console.log(output)
-    }else if(token==='/'){
-        output=Number(num[num.length-2])/Number(num[num.length-1])
-        num.pop()
-        num.pop()
-        num.push(Math.trunc(output))
-        console.log(output)
-    }else{
-        num.push(token)
+// Pre-fill the output array with 0s. 
+// If a day never finds a warmer temperature, it just stays 0.
+let output = new Array(temperatures.length).fill(0); 
+let stack = []; // THIS WILL ONLY HOLD INDICES
+
+for (let i = 0; i < temperatures.length; i++) {
+    let currentTemp = temperatures[i];
+
+    // THE ENGINE:
+    // While the stack is NOT empty 
+    // AND the currentTemp is GREATER THAN the temperature of the index sitting at the top of the stack...
+    while ( stack.length!==0 && currentTemp>temperatures[stack[stack.length-1]] ) {
+        
+        // 1. Pop the top index off the stack. Let's call it 'parkedIndex'.
+        let parkedIndex=stack.pop()
+        
+        // 2. Calculate the distance: i - parkedIndex
+        let a=i-parkedIndex
+        
+        // 3. Put that distance into the output array at the parkedIndex position: output[parkedIndex] = distance
+        output[parkedIndex]=a
     }
+
+    // After resolving any older colder days, park the current day's index to wait for its own warmer day.
+    stack.push(i);
 }
-console.log(output)
+
+console.log(output);
