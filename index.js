@@ -1,18 +1,30 @@
-s = "[(])"
+class MinStack {
+    constructor() {
+        this.minStack = [];
+        this.min = [];
+    }
 
-const obj={
-    ")":"(",
-    "}":"{",
-    "]":"["
-}
-let stack=[]
+    push(val) {
+        this.minStack.push(val);
+        // If min stack is empty OR the new value is a new/duplicate minimum
+        if (this.min.length === 0 || val <= this.min[this.min.length - 1]) {
+            this.min.push(val);
+        }
+    }
 
-for(const i of s){
-    if(i in obj && stack[stack.length-1]===obj[i]){
-        stack.pop(i)
-    }else{
-    stack.push(i)}
+    pop() {
+        const poppedValue = this.minStack.pop();
+        // If the value we just removed was our current minimum, remove it from history
+        if (this.min.length > 0 && poppedValue === this.min[this.min.length - 1]) {
+            this.min.pop();
+        }
+    }
+
+    top() {
+        return this.minStack[this.minStack.length - 1];
+    }
+
+    getMin() {
+        return this.min[this.min.length - 1];
+    }
 }
-if(stack.length===0){console.log(true)}
-else{console.log(false)}
-console.log(stack)
