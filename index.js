@@ -1,30 +1,38 @@
-let temperatures = [30, 38, 30, 36, 35, 40, 28];
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     constructor(val = 0, next = null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
 
-// Pre-fill the output array with 0s. 
-// If a day never finds a warmer temperature, it just stays 0.
-let output = new Array(temperatures.length).fill(0); 
-let stack = []; // THIS WILL ONLY HOLD INDICES
+class Solution {
+    /**
+     * @param {ListNode} list1
+     * @param {ListNode} list2
+     * @return {ListNode}
+     */
+    mergeTwoLists(list1, list2) {
+        let dummy=new ListNode(0)
+        let curr=dummy;
 
-for (let i = 0; i < temperatures.length; i++) {
-    let currentTemp = temperatures[i];
-
-    // THE ENGINE:
-    // While the stack is NOT empty 
-    // AND the currentTemp is GREATER THAN the temperature of the index sitting at the top of the stack...
-    while ( stack.length!==0 && currentTemp>temperatures[stack[stack.length-1]] ) {
-        
-        // 1. Pop the top index off the stack. Let's call it 'parkedIndex'.
-        let parkedIndex=stack.pop()
-        
-        // 2. Calculate the distance: i - parkedIndex
-        let a=i-parkedIndex
-        
-        // 3. Put that distance into the output array at the parkedIndex position: output[parkedIndex] = distance
-        output[parkedIndex]=a
+        while(list1!==null&&list2!==null){
+            if(list1.val<list2.val){
+                curr.next=list1;
+                list1=list1.next
+            }else{
+                curr.next=list2;
+                list2=list2.next
+            }
+            curr=curr.next
+        }
+        if (list1 !== null) {
+            curr.next = list1;
+        } else {
+            curr.next = list2;
+        }
+        return dummy.next;
     }
-
-    // After resolving any older colder days, park the current day's index to wait for its own warmer day.
-    stack.push(i);
 }
-
-console.log(output);
